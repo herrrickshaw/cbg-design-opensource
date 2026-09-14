@@ -59,7 +59,9 @@ a genuine, counter-to-naive-intuition result: already-processed residues
 (press mud, cattle dung) calibrate to LOWER biodegradability than fresh
 straw, not higher. `docs/VENDOR_REFERENCE.md` cross-checks real CBG
 technology providers (Evonik's SEPURAN® Green membrane, KPO Group's CSTR
-digester operating parameters) against this project's own method set.
+digester operating parameters, and Greenlane Renewables — one real
+vendor spanning all three of `upgrading.py`'s technology categories:
+water scrubbing, PSA, and membrane) against this project's own method set.
 
 ## Related open-source work
 
