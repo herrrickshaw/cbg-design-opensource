@@ -110,16 +110,26 @@ def digest(feedstock: FeedstockAnalysis, biodegradability_fraction: float | None
 
 
 def digester_working_volume(feedstock: FeedstockAnalysis, dilution_water_kg_s: float,
-                            hrt_days: float = 30.0, slurry_density_kg_m3: float = 1000.0) -> dict:
+                            hrt_days: float | None = None, slurry_density_kg_m3: float = 1000.0) -> dict:
     """Working digester volume from hydraulic retention time (HRT) -- a
-    standard wet-AD design parameter, typically 20-40 days for
-    agricultural-residue/manure CBG digesters (this module's default,
-    30 days, is the range's midpoint; shorter for warmer/more digestible
-    feed, longer for cooler/more recalcitrant feed). A real Indian CBG
+    standard wet-AD design parameter. `hrt_days` defaults to the
+    feedstock's own calibrated `default_hrt_days` when not given
+    explicitly (see `feedstock.py`): 30 days (a commonly cited 20-40 day
+    range's midpoint) for paddy straw and press mud, but 85 days for
+    cattle dung -- a real, vendor-sourced figure (WELTEC BIOPOWER's own
+    published digester spec states retention "can be as long as 80-90
+    days if the manure content is high", see docs/VENDOR_REFERENCE.md),
+    not the generic default. This mirrors the SAME real, counter-to-
+    naive-intuition finding `digest()`'s biodegradability calibration
+    already found for cattle dung (manure digests LESS completely and
+    LESS quickly than fresh straw, not more/faster) showing up
+    independently in a second real design parameter. A real Indian CBG
     EPC provider's own published CSTR operating range (32-38 C, 10-12%
     organic loading rate -- see docs/VENDOR_REFERENCE.md, KPO Group)
     independently confirms this module's implicit mesophilic-digestion
     assumption."""
+    if hrt_days is None:
+        hrt_days = feedstock.default_hrt_days
     total_feed_kg_s = feedstock.mass_flow_kg_s + dilution_water_kg_s
     daily_feed_m3 = total_feed_kg_s * 86400.0 / slurry_density_kg_m3
     working_volume_m3 = daily_feed_m3 * hrt_days

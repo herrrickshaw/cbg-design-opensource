@@ -47,3 +47,22 @@ def test_digester_working_volume_scales_linearly_with_hrt():
     short = AD.digester_working_volume(fs, dilution_water_kg_s=20.0, hrt_days=20.0)
     long = AD.digester_working_volume(fs, dilution_water_kg_s=20.0, hrt_days=40.0)
     assert long["digester_working_volume_m3"] == pytest.approx(2 * short["digester_working_volume_m3"])
+
+
+def test_digester_working_volume_defaults_to_the_feedstock_own_hrt():
+    dung, straw = F.cattle_dung(10.0), F.paddy_straw(10.0)
+    r_dung = AD.digester_working_volume(dung, dilution_water_kg_s=20.0)
+    r_straw = AD.digester_working_volume(straw, dilution_water_kg_s=20.0)
+    assert r_dung["hrt_days"] == pytest.approx(dung.default_hrt_days)
+    assert r_straw["hrt_days"] == pytest.approx(straw.default_hrt_days)
+
+
+def test_default_hrt_would_have_understated_cattle_dung_digester_volume_by_2_8x():
+    # A real, quantified consequence of the vendor-sourced fix: had the generic
+    # 30-day default been used for cattle dung instead of the real 85-day figure,
+    # the digester would have been undersized by roughly 85/30 ~= 2.83x.
+    dung = F.cattle_dung(10.0)
+    real = AD.digester_working_volume(dung, dilution_water_kg_s=20.0)
+    generic = AD.digester_working_volume(dung, dilution_water_kg_s=20.0, hrt_days=30.0)
+    assert real["digester_working_volume_m3"] / generic["digester_working_volume_m3"] == pytest.approx(
+        dung.default_hrt_days / 30.0, rel=1e-6)

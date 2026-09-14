@@ -47,6 +47,32 @@ stands in for. The ORDERING finding (straw > press mud ~ cattle dung)
 is the genuinely informative result; the exact third-decimal-place
 values are fitted, not independently measured.
 
+## Digester HRT -- the same finding confirmed independently, in a different real parameter
+
+Vendor research on `docs/VENDOR_REFERENCE.md` (WELTEC BIOPOWER's own
+published digester process spec) surfaced a real gap in the original
+`digester_working_volume()`: it used one generic 30-day HRT default for
+every feedstock, when Weltec's own real-world experience states
+retention "can be as long as 80-90 days if the manure content is high."
+This is the SAME real finding the biodegradability calibration above
+made independently -- cattle dung digests less completely AND more
+slowly than fresh straw, not more/faster on either count -- now showing
+up a second time, in a completely different real design parameter
+(residence time, not yield), from a completely different source (a real
+equipment vendor's own published spec, not a back-solved calibration
+against a yield figure). `feedstock.py`'s `cattle_dung()` preset now
+carries a real, vendor-sourced 85-day default (the midpoint of Weltec's
+80-90 day figure) instead of the generic 30 days; `digester_working_volume()`
+uses it automatically unless overridden.
+
+**Quantified consequence, not a cosmetic fix**: at a 100% cattle-dung
+feed, the generic 30-day default would have undersized the digester by
+roughly 2.83x (85/30) relative to what this real vendor figure implies
+-- a genuinely consequential correction to a physical equipment size,
+not a minor parameter tweak. This module's test suite
+(`test_default_hrt_would_have_understated_cattle_dung_digester_volume_by_2_8x`)
+guards the exact ratio as a regression.
+
 ## Real-gas storage sizing -- CoolProp vs. ideal gas at 250 bar
 
 `compression_storage.cascade_storage_volume()` computes methane/CO2

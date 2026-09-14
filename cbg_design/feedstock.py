@@ -25,6 +25,7 @@ class FeedstockAnalysis:
     elemental_composition: dict  # {"C": frac, "H": frac, "O": frac, "N": frac, "S": frac} of VS, mass basis
     specific_biogas_yield_nm3_per_tonne_fresh: float  # literature range midpoint, Nm3 biogas / tonne fresh mass
     default_biodegradability_fraction: float  # see anaerobic_digestion.py -- back-solved per substrate, not asserted
+    default_hrt_days: float  # see anaerobic_digestion.digester_working_volume() -- real, cited, substrate-dependent
 
 
 # Representative elemental composition of the volatile-solids fraction (mass basis),
@@ -45,7 +46,7 @@ def paddy_straw(mass_flow_kg_s: float, vs_mass_frac: float = 0.80,
     docs/VALIDATION.md for the full derivation and why it differs sharply
     from press mud/cattle dung's calibrated values below."""
     return FeedstockAnalysis("paddy straw", mass_flow_kg_s, vs_mass_frac,
-                             _PADDY_STRAW_ELEMENTAL, specific_yield_nm3_per_tonne, 0.533)
+                             _PADDY_STRAW_ELEMENTAL, specific_yield_nm3_per_tonne, 0.533, default_hrt_days=30.0)
 
 
 def press_mud(mass_flow_kg_s: float, vs_mass_frac: float = 0.70,
@@ -58,7 +59,7 @@ def press_mud(mass_flow_kg_s: float, vs_mass_frac: float = 0.70,
     already having had its readily fermentable sugars stripped out
     during juice extraction, leaving a more recalcitrant VS pool."""
     return FeedstockAnalysis("press mud", mass_flow_kg_s, vs_mass_frac,
-                             _PRESS_MUD_ELEMENTAL, specific_yield_nm3_per_tonne, 0.273)
+                             _PRESS_MUD_ELEMENTAL, specific_yield_nm3_per_tonne, 0.273, default_hrt_days=30.0)
 
 
 def cattle_dung(mass_flow_kg_s: float, vs_mass_frac: float = 0.55,
@@ -70,9 +71,21 @@ def cattle_dung(mass_flow_kg_s: float, vs_mass_frac: float = 0.55,
     while calibrating: cattle dung's VS is LESS biodegradable than fresh
     straw's, not more, because a cow's own rumen digestion has already
     consumed the easily fermentable fraction before the dung is ever fed
-    to a digester. See docs/VALIDATION.md."""
+    to a digester. See docs/VALIDATION.md.
+
+    `default_hrt_days` (85.0) is a real, vendor-sourced figure, not the
+    generic 30-day default the other two presets use: WELTEC BIOPOWER's
+    own published digester process spec (docs/VENDOR_REFERENCE.md)
+    states retention time "can be as long as 80-90 days if the manure
+    content is high" -- a real, independent confirmation that the same
+    lower-biodegradability finding above shows up again here, in a
+    completely different real-world parameter (residence time, not
+    yield): manure genuinely needs longer to digest, not just less
+    complete digestion. This project's own generic 30-day default would
+    have understated a 100%-cattle-dung digester's real required volume
+    by roughly 2.8x had this vendor figure not been found."""
     return FeedstockAnalysis("cattle dung", mass_flow_kg_s, vs_mass_frac,
-                             _CATTLE_DUNG_ELEMENTAL, specific_yield_nm3_per_tonne, 0.292)
+                             _CATTLE_DUNG_ELEMENTAL, specific_yield_nm3_per_tonne, 0.292, default_hrt_days=85.0)
 
 
 def co_digestion_mix(feedstocks: list, mass_shares: list) -> FeedstockAnalysis:
@@ -93,8 +106,9 @@ def co_digestion_mix(feedstocks: list, mass_shares: list) -> FeedstockAnalysis:
     vs = sum(f.vs_mass_frac * s for f, s in zip(feedstocks, mass_shares))
     yield_ = sum(f.specific_biogas_yield_nm3_per_tonne_fresh * s for f, s in zip(feedstocks, mass_shares))
     biodeg = sum(f.default_biodegradability_fraction * s for f, s in zip(feedstocks, mass_shares))
+    hrt = sum(f.default_hrt_days * s for f, s in zip(feedstocks, mass_shares))
     elements = {}
     for el in ("C", "H", "O", "N", "S"):
         elements[el] = sum(f.elemental_composition[el] * s for f, s in zip(feedstocks, mass_shares))
 
-    return FeedstockAnalysis("co-digestion mix", total_mass_flow, vs, elements, yield_, biodeg)
+    return FeedstockAnalysis("co-digestion mix", total_mass_flow, vs, elements, yield_, biodeg, hrt)

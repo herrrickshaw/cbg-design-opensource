@@ -57,9 +57,15 @@ finding this project surfaces rather than hides (see
 against three independently published feedstock yield figures produced
 a genuine, counter-to-naive-intuition result: already-processed residues
 (press mud, cattle dung) calibrate to LOWER biodegradability than fresh
-straw, not higher. `docs/VENDOR_REFERENCE.md` cross-checks real CBG
-technology providers (Evonik's SEPURAN® Green membrane, KPO Group's CSTR
-digester operating parameters, and Greenlane Renewables — one real
+straw, not higher — independently confirmed by a real vendor's own
+published spec in a second parameter entirely: WELTEC BIOPOWER states
+manure needs 80-90 days retention vs. a general 20-60 day range, which
+is why `feedstock.cattle_dung()` now defaults to a real 85-day HRT
+instead of the generic 30 days other presets use (a ~2.83x digester-
+volume consequence, not a cosmetic fix — see `docs/VALIDATION.md`).
+`docs/VENDOR_REFERENCE.md` cross-checks real CBG technology providers
+(Evonik's SEPURAN® Green membrane, KPO Group's and WELTEC BIOPOWER's
+CSTR digester operating parameters, and Greenlane Renewables — one real
 vendor spanning all three of `upgrading.py`'s technology categories:
 water scrubbing, PSA, and membrane) against this project's own method set.
 

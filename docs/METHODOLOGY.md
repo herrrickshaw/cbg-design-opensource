@@ -28,6 +28,16 @@ full calibration and the real, counter-to-naive-intuition finding it
 produced (press mud and cattle dung calibrate to markedly LOWER
 biodegradability than fresh straw, not higher).
 
+`digester_working_volume()`'s hydraulic retention time (HRT) similarly
+defaults per feedstock rather than to one generic figure: 30 days
+(a commonly cited 20-40 day range's midpoint) for paddy straw and press
+mud, but 85 days for cattle dung -- a real, vendor-sourced figure
+(WELTEC BIOPOWER's own published digester spec, docs/VENDOR_REFERENCE.md)
+found to independently confirm the SAME biodegradability finding above
+in a second, unrelated real parameter: manure genuinely needs longer to
+digest, not just less complete digestion. See docs/VALIDATION.md for
+the quantified consequence (a ~2.83x digester-volume difference).
+
 ## Upgrading (`cbg_design/upgrading.py`)
 
 India's IS 16087:2016 CBG specification requires a minimum of 90% CH4,

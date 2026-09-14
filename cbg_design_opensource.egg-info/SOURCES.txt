@@ -1,3 +1,5 @@
+LICENSE
+README.md
 pyproject.toml
 cbg_design/__init__.py
 cbg_design/anaerobic_digestion.py
@@ -11,3 +13,9 @@ cbg_design_opensource.egg-info/SOURCES.txt
 cbg_design_opensource.egg-info/dependency_links.txt
 cbg_design_opensource.egg-info/requires.txt
 cbg_design_opensource.egg-info/top_level.txt
+tests/test_anaerobic_digestion.py
+tests/test_compression_storage.py
+tests/test_digestate.py
+tests/test_feedstock.py
+tests/test_properties.py
+tests/test_upgrading.py
