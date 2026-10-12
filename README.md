@@ -1,5 +1,9 @@
 # CBG Design (open-source)
 
+<!-- how-to-use-with-ai -->
+> **New here?** See [How to use this repo with AI (Claude, Gemini, ChatGPT)](HOW_TO_USE_WITH_AI.md) — clone it, paste it into an AI tool, and ask in plain English.
+
+
 Interactive, open-source conceptual sizing tools for a Compressed Biogas
 (CBG) plant under India's SATAT scheme — feedstock characterization,
 Buswell-equation anaerobic digestion with a per-substrate calibrated
