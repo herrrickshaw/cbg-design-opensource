@@ -34,8 +34,14 @@ def test_co_digestion_mix_is_mass_weighted():
     dung = F.cattle_dung(10.0)
     mix = F.co_digestion_mix([straw, dung], [0.5, 0.5])
     assert mix.vs_mass_frac == pytest.approx(0.5 * straw.vs_mass_frac + 0.5 * dung.vs_mass_frac)
+    # Biodegradability is a fraction of each stream's CH4 potential, so it blends on
+    # VS mass x theoretical CH4 per kg VS, not on fresh mass (the earlier fresh-mass
+    # expectation here contradicted methane conservation -- see the sum-of-parts test).
+    from cbg_design.anaerobic_digestion import buswell_theoretical_yield as B
+    w_s = 0.5 * straw.vs_mass_frac * B(straw.elemental_composition)["mol_ch4_per_kg_vs"]
+    w_d = 0.5 * dung.vs_mass_frac * B(dung.elemental_composition)["mol_ch4_per_kg_vs"]
     assert mix.default_biodegradability_fraction == pytest.approx(
-        0.5 * straw.default_biodegradability_fraction + 0.5 * dung.default_biodegradability_fraction)
+        (w_s * straw.default_biodegradability_fraction + w_d * dung.default_biodegradability_fraction) / (w_s + w_d))
     assert mix.default_hrt_days == pytest.approx(0.5 * straw.default_hrt_days + 0.5 * dung.default_hrt_days)
 
 
