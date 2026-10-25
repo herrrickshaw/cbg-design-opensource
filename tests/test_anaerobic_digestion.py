@@ -66,3 +66,19 @@ def test_default_hrt_would_have_understated_cattle_dung_digester_volume_by_2_8x(
     generic = AD.digester_working_volume(dung, dilution_water_kg_s=20.0, hrt_days=30.0)
     assert real["digester_working_volume_m3"] / generic["digester_working_volume_m3"] == pytest.approx(
         dung.default_hrt_days / 30.0, rel=1e-6)
+
+
+def test_buswell_cellulose_gives_textbook_415_l_ch4_per_kg_vs():
+    # (C6H10O5)n + H2O -> 3 CH4 + 3 CO2 : 3 mol CH4 per 162.14 g = 18.50 mol/kg
+    # x 22.414 L/mol = 414.7 L CH4 / kg VS (the standard ~415 NL/g-VS carbohydrate value)
+    comp = {"C": 72.066 / 162.14, "H": 10.08 / 162.14, "O": 79.995 / 162.14, "N": 0.0}
+    r = AD.buswell_theoretical_yield(comp)
+    assert r["mol_ch4_per_kg_vs"] == pytest.approx(3 / 0.16214, rel=1e-3)
+    assert r["mol_ch4_per_kg_vs"] * 22.414 == pytest.approx(414.7, abs=0.5)
+    assert r["mol_co2_per_kg_vs"] == pytest.approx(r["mol_ch4_per_kg_vs"], rel=1e-3)
+
+
+def test_buswell_rejects_over_oxidised_substrate():
+    # Carbonic acid H2CO3: 4a + b - 2c = 4 + 2 - 6 = 0 -> no methane, must raise
+    with pytest.raises(ValueError):
+        AD.buswell_theoretical_yield({"C": 12.011 / 62.024, "H": 2.016 / 62.024, "O": 47.997 / 62.024, "N": 0.0})
