@@ -17,12 +17,13 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-from .anaerobic_digestion import DigestionResult
+from .anaerobic_digestion import MOLAR_VOLUME_NM3_PER_KMOL, DigestionResult
 from .feedstock import FeedstockAnalysis
 
 # Standard molar mass of CH4 (kg/kmol) -- used to convert the Buswell-
 # balance's molar CH4 output back into a mass leaving the solids balance.
 MW_CH4_KG_KMOL = 16.043
+MW_CO2_KG_KMOL = 44.01
 
 
 @dataclass
@@ -35,13 +36,14 @@ class DigestateResult:
 
 def characterize_digestate(feedstock: FeedstockAnalysis, digestion: DigestionResult,
                            dilution_water_kg_s: float, digestate_density_kg_m3: float = 1000.0) -> DigestateResult:
+    """Digestate mass/volume flow and solids content from the VS-destruction balance (kg/s in, m3/day out)."""
     total_feed_kg_s = feedstock.mass_flow_kg_s + dilution_water_kg_s
     # CH4 molar flow (Nm3/s -> kmol/s via the standard 22.414 Nm3/kmol molar volume,
     # matching anaerobic_digestion.py's own reference), converted to a mass leaving
     # the solids balance as biogas.
-    ch4_kmol_s = digestion.ch4_flow_nm3_s / 22.414
+    ch4_kmol_s = digestion.ch4_flow_nm3_s / MOLAR_VOLUME_NM3_PER_KMOL
     co2_kmol_s = ch4_kmol_s * (1 - digestion.biogas_ch4_mole_frac) / digestion.biogas_ch4_mole_frac
-    biogas_mass_flow_kg_s = ch4_kmol_s * MW_CH4_KG_KMOL + co2_kmol_s * 44.01
+    biogas_mass_flow_kg_s = ch4_kmol_s * MW_CH4_KG_KMOL + co2_kmol_s * MW_CO2_KG_KMOL
 
     digestate_mass_flow_kg_s = total_feed_kg_s - biogas_mass_flow_kg_s
     if digestate_mass_flow_kg_s <= 0:
