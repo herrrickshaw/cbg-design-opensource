@@ -105,10 +105,18 @@ def co_digestion_mix(feedstocks: list, mass_shares: list) -> FeedstockAnalysis:
     total_mass_flow = sum(f.mass_flow_kg_s for f in feedstocks)
     vs = sum(f.vs_mass_frac * s for f, s in zip(feedstocks, mass_shares))
     yield_ = sum(f.specific_biogas_yield_nm3_per_tonne_fresh * s for f, s in zip(feedstocks, mass_shares))
-    biodeg = sum(f.default_biodegradability_fraction * s for f, s in zip(feedstocks, mass_shares))
     hrt = sum(f.default_hrt_days * s for f, s in zip(feedstocks, mass_shares))
+    # Elemental composition and biodegradability are per-kg-VS quantities, so they
+    # blend on VS mass (share x VS fraction), and biodegradability additionally on
+    # each stream's theoretical CH4 potential -- the weighting under which digesting
+    # the mix gives exactly the CH4 of digesting each stream separately (no synergy).
+    from .anaerobic_digestion import buswell_theoretical_yield
+    vs_w = [f.vs_mass_frac * s for f, s in zip(feedstocks, mass_shares)]
     elements = {}
     for el in ("C", "H", "O", "N", "S"):
-        elements[el] = sum(f.elemental_composition[el] * s for f, s in zip(feedstocks, mass_shares))
+        elements[el] = sum(f.elemental_composition[el] * w for f, w in zip(feedstocks, vs_w)) / sum(vs_w)
+    ch4_w = [w * buswell_theoretical_yield(f.elemental_composition)["mol_ch4_per_kg_vs"]
+             for f, w in zip(feedstocks, vs_w)]
+    biodeg = sum(f.default_biodegradability_fraction * w for f, w in zip(feedstocks, ch4_w)) / sum(ch4_w)
 
     return FeedstockAnalysis("co-digestion mix", total_mass_flow, vs, elements, yield_, biodeg, hrt)
