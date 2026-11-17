@@ -21,3 +21,15 @@ dev = ["pytest>=8.0"]
 
 [tool.setuptools.packages.find]
 include = ["cbg_design*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+
+[tool.ruff]
+line-length = 120
+extend-exclude = [".venv"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I"]
+ignore = ["E501", "E701"]

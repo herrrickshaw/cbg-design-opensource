@@ -62,6 +62,7 @@ class UpgradingResult:
 def upgrade_biogas(raw_biogas_flow_nm3_s: float, raw_ch4_mole_frac: float,
                    technology: str = "water_scrubbing", specific_power_kwh_per_nm3: float | None = None,
                    ch4_slip_frac: float | None = None, co2_removal_frac: float = 0.98) -> UpgradingResult:
+    """Product CH4 flow/purity, CH4 slip and power for a raw biogas stream (flows in Nm3/s, power in kW)."""
     if technology not in TECHNOLOGY_SPECIFIC_POWER_KWH_PER_NM3:
         raise ValueError(f"technology must be one of {list(TECHNOLOGY_SPECIFIC_POWER_KWH_PER_NM3)}")
     if not 0 < raw_ch4_mole_frac < 1:

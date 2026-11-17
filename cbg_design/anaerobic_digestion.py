@@ -40,7 +40,6 @@ result, the real, directly measurable quantity this factor stands in
 for)."""
 from __future__ import annotations
 
-import math
 from dataclasses import dataclass
 
 from .feedstock import FeedstockAnalysis
@@ -60,7 +59,7 @@ class DigestionResult:
     biodegradability_fraction: float
 
 
-def buswell_theoretical_yield(elemental_composition: dict) -> dict:
+def buswell_theoretical_yield(elemental_composition: dict[str, float]) -> dict[str, float]:
     """Moles of CH4 and CO2 per kg of VS, from the Buswell equation applied
     to 1 kg of substrate at the given mass-fraction elemental composition
     (a, b, c, d are moles-per-kg, not an integer molecular formula --
@@ -110,7 +109,7 @@ def digest(feedstock: FeedstockAnalysis, biodegradability_fraction: float | None
 
 
 def digester_working_volume(feedstock: FeedstockAnalysis, dilution_water_kg_s: float,
-                            hrt_days: float | None = None, slurry_density_kg_m3: float = 1000.0) -> dict:
+                            hrt_days: float | None = None, slurry_density_kg_m3: float = 1000.0) -> dict[str, float]:
     """Working digester volume from hydraulic retention time (HRT) -- a
     standard wet-AD design parameter. `hrt_days` defaults to the
     feedstock's own calibrated `default_hrt_days` when not given

@@ -84,10 +84,10 @@ def main() -> None:
     print(f"Compression to 250 bar: {compression.total_power_kW:.0f} kW, {compression.n_stages} stages")
     print(f"Digestate (Fermented Organic Manure): {digestate.digestate_flow_m3_day:,.0f} m3/day")
 
-    print(f"\n=== Validation: a 100% cattle-dung feed lands within a few percent of the published "
-          f"10 t/day; any straw-inclusive mix overshoots it substantially, since straw's calibrated "
-          f"per-tonne yield is roughly 3x cattle dung's. See docs/VALIDATION.md for the honest discussion "
-          f"of what this does and doesn't prove about Barsana's real (undisclosed) feedstock mix. ===")
+    print("\n=== Validation: a 100% cattle-dung feed lands within a few percent of the published "
+          "10 t/day; any straw-inclusive mix overshoots it substantially, since straw's calibrated "
+          "per-tonne yield is roughly 3x cattle dung's. See docs/VALIDATION.md for the honest discussion "
+          "of what this does and doesn't prove about Barsana's real (undisclosed) feedstock mix. ===")
 
 
 if __name__ == "__main__":

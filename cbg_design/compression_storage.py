@@ -24,10 +24,20 @@ format) is sized directly from CoolProp's real density at 250 bar rather
 than PV = nRT."""
 from __future__ import annotations
 
-import math
 from dataclasses import dataclass
+from typing import Protocol
 
-import CoolProp.CoolProp as CP
+
+class GasProperties(Protocol):
+    """The slice of `properties.GasMixture` that compression/storage sizing needs."""
+
+    def prop(self, output: str, T: float, P: float) -> float: ...
+    def density(self, T: float, P: float) -> float: ...
+    def compressibility(self, T: float, P: float) -> float: ...
+    def molecular_weight(self) -> float: ...
+
+
+R_UNIVERSAL_J_MOL_K = 8.314462618
 
 
 @dataclass
@@ -43,23 +53,23 @@ class CompressorStageResult:
 @dataclass
 class CompressionResult:
     n_stages: int
-    stages: list
+    stages: list[CompressorStageResult]
     total_power_kW: float
 
 
-def _isentropic_exponent(gas_mixture, T_K: float, P_Pa: float) -> float:
+def _isentropic_exponent(gas_mixture: GasProperties, T_K: float, P_Pa: float) -> float:
     cp = gas_mixture.prop("Cpmass", T_K, P_Pa)
     cv = gas_mixture.prop("Cvmass", T_K, P_Pa)
     return cp / cv
 
 
-def _compress_one_stage(gas_mixture, T_in_K: float, P_in_Pa: float, P_out_Pa: float,
+def _compress_one_stage(gas_mixture: GasProperties, T_in_K: float, P_in_Pa: float, P_out_Pa: float,
                         mass_flow_kg_s: float, polytropic_efficiency: float) -> CompressorStageResult:
     k = _isentropic_exponent(gas_mixture, T_in_K, P_in_Pa)
     n = 1.0 / (1.0 - (k - 1.0) / (k * polytropic_efficiency))
     Z = gas_mixture.compressibility(T_in_K, P_in_Pa)
     M = gas_mixture.molecular_weight() / 1000.0  # kg/mol
-    R_specific = 8.314462618 / M  # J/kg-K
+    R_specific = R_UNIVERSAL_J_MOL_K / M  # J/kg-K
 
     pressure_ratio = P_out_Pa / P_in_Pa
     head_J_kg = Z * R_specific * T_in_K * (n / (n - 1.0)) * (pressure_ratio ** ((n - 1.0) / n) - 1.0)
@@ -70,7 +80,7 @@ def _compress_one_stage(gas_mixture, T_in_K: float, P_in_Pa: float, P_out_Pa: fl
                                  polytropic_head_kJ_kg=head_J_kg / 1000.0, power_kW=power_kW)
 
 
-def compress_to_cbg_pressure(gas_mixture, mass_flow_kg_s: float, P_in_Pa: float,
+def compress_to_cbg_pressure(gas_mixture: GasProperties, mass_flow_kg_s: float, P_in_Pa: float,
                              P_out_Pa: float = 250e5, T_suction_K: float = 313.15,
                              n_stages: int = 4, polytropic_efficiency: float = 0.75) -> CompressionResult:
     """Splits P_out/P_in evenly (log-mean) across `n_stages`, with
@@ -100,13 +110,13 @@ def compress_to_cbg_pressure(gas_mixture, mass_flow_kg_s: float, P_in_Pa: float,
     return CompressionResult(n_stages=n_stages, stages=stages, total_power_kW=total_power)
 
 
-def cascade_storage_volume(gas_mixture, mass_to_store_kg: float, P_Pa: float = 250e5,
-                           T_K: float = 313.15) -> dict:
+def cascade_storage_volume(gas_mixture: GasProperties, mass_to_store_kg: float, P_Pa: float = 250e5,
+                           T_K: float = 313.15) -> dict[str, float]:
     """Storage volume from CoolProp's real density at storage conditions
     (not the ideal-gas law) -- see module docstring for why this matters
     at 250 bar."""
     rho_real = gas_mixture.density(T_K, P_Pa)
-    rho_ideal = P_Pa * (gas_mixture.molecular_weight() / 1000.0) / (8.314462618 * T_K)
+    rho_ideal = P_Pa * (gas_mixture.molecular_weight() / 1000.0) / (R_UNIVERSAL_J_MOL_K * T_K)
     volume_m3 = mass_to_store_kg / rho_real
     return {"real_density_kg_m3": rho_real, "ideal_gas_density_kg_m3": rho_ideal,
             "compressibility_factor_Z": gas_mixture.compressibility(T_K, P_Pa),

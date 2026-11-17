@@ -1,0 +1,696 @@
+{
+ "bus.cattle_dung": {
+  "mol_ch4_per_kg_vs": 16.891432396764714,
+  "mol_co2_per_kg_vs": 16.411373364620683
+ },
+ "bus.mix": {
+  "mol_ch4_per_kg_vs": 17.47881578599439,
+  "mol_co2_per_kg_vs": 17.156102205846434
+ },
+ "bus.paddy_straw": {
+  "mol_ch4_per_kg_vs": 18.359890869838885,
+  "mol_co2_per_kg_vs": 18.27319546768506
+ },
+ "bus.press_mud": {
+  "mol_ch4_per_kg_vs": 17.89059613033899,
+  "mol_co2_per_kg_vs": 17.077349919115676
+ },
+ "comp.cbg": {
+  "n_stages": 4,
+  "stages": [
+   {
+    "P_in_Pa": 150000.0,
+    "P_out_Pa": 538956.1679446263,
+    "T_out_K": 464.09760205888955,
+    "polytropic_head_kJ_kg": 233.4090021428646,
+    "power_kW": 77.80300071428819,
+    "stage": 1
+   },
+   {
+    "P_in_Pa": 538956.1679446263,
+    "P_out_Pa": 1936491.6731037083,
+    "T_out_K": 468.4565285367461,
+    "polytropic_head_kJ_kg": 233.19419002027718,
+    "power_kW": 77.73139667342572,
+    "stage": 2
+   },
+   {
+    "P_in_Pa": 1936491.6731037083,
+    "P_out_Pa": 6957894.20928435,
+    "T_out_K": 484.9550775019018,
+    "polytropic_head_kJ_kg": 232.58831410044212,
+    "power_kW": 77.5294380334807,
+    "stage": 3
+   },
+   {
+    "P_in_Pa": 6957894.20928435,
+    "P_out_Pa": 24999999.999999993,
+    "T_out_K": 553.40266904299,
+    "polytropic_head_kJ_kg": 232.5480928024144,
+    "power_kW": 77.51603093413813,
+    "stage": 4
+   }
+  ],
+  "total_power_kW": 310.57986635533274
+ },
+ "comp.cbg92": {
+  "n_stages": 4,
+  "stages": [
+   {
+    "P_in_Pa": 150000.0,
+    "P_out_Pa": 538956.1679446263,
+    "T_out_K": 463.9021828353965,
+    "polytropic_head_kJ_kg": 222.6293538262996,
+    "power_kW": 74.20978460876654,
+    "stage": 1
+   },
+   {
+    "P_in_Pa": 538956.1679446263,
+    "P_out_Pa": 1936491.6731037083,
+    "T_out_K": 468.3454792989775,
+    "polytropic_head_kJ_kg": 222.4018639687227,
+    "power_kW": 74.13395465624089,
+    "stage": 2
+   },
+   {
+    "P_in_Pa": 1936491.6731037083,
+    "P_out_Pa": 6957894.20928435,
+    "T_out_K": 485.2015202766345,
+    "polytropic_head_kJ_kg": 221.74487783252232,
+    "power_kW": 73.91495927750744,
+    "stage": 3
+   },
+   {
+    "P_in_Pa": 6957894.20928435,
+    "P_out_Pa": 24999999.999999993,
+    "T_out_K": 555.6738207092343,
+    "polytropic_head_kJ_kg": 221.43644534383046,
+    "power_kW": 73.81214844794349,
+    "stage": 4
+   }
+  ],
+  "total_power_kW": 296.07084699045834
+ },
+ "comp.raw": {
+  "n_stages": 4,
+  "stages": [
+   {
+    "P_in_Pa": 150000.0,
+    "P_out_Pa": 538956.1679446263,
+    "T_out_K": 461.9495061632993,
+    "polytropic_head_kJ_kg": 148.969337821348,
+    "power_kW": 49.65644594044934,
+    "stage": 1
+   },
+   {
+    "P_in_Pa": 538956.1679446263,
+    "P_out_Pa": 1936491.6731037083,
+    "T_out_K": 467.5580005114609,
+    "polytropic_head_kJ_kg": 148.60923052960092,
+    "power_kW": 49.53641017653364,
+    "stage": 2
+   },
+   {
+    "P_in_Pa": 1936491.6731037083,
+    "P_out_Pa": 6957894.20928435,
+    "T_out_K": 489.59576122457685,
+    "polytropic_head_kJ_kg": 147.43743429913823,
+    "power_kW": 49.14581143304608,
+    "stage": 3
+   },
+   {
+    "P_in_Pa": 6957894.20928435,
+    "P_out_Pa": 24999999.999999993,
+    "T_out_K": 594.0200206357691,
+    "polytropic_head_kJ_kg": 144.61722084956105,
+    "power_kW": 48.20574028318701,
+    "stage": 4
+   }
+  ],
+  "total_power_kW": 196.5444078332161
+ },
+ "comp.raw55": {
+  "n_stages": 4,
+  "stages": [
+   {
+    "P_in_Pa": 150000.0,
+    "P_out_Pa": 538956.1679446263,
+    "T_out_K": 461.6665993628991,
+    "polytropic_head_kJ_kg": 141.61860489485622,
+    "power_kW": 47.20620163161875,
+    "stage": 1
+   },
+   {
+    "P_in_Pa": 538956.1679446263,
+    "P_out_Pa": 1936491.6731037083,
+    "T_out_K": 467.5038734990052,
+    "polytropic_head_kJ_kg": 141.23862864537045,
+    "power_kW": 47.07954288179015,
+    "stage": 2
+   },
+   {
+    "P_in_Pa": 1936491.6731037083,
+    "P_out_Pa": 6957894.20928435,
+    "T_out_K": 490.61140323649687,
+    "polytropic_head_kJ_kg": 139.9913065937002,
+    "power_kW": 46.66376886456673,
+    "stage": 3
+   },
+   {
+    "P_in_Pa": 6957894.20928435,
+    "P_out_Pa": 24999999.999999993,
+    "T_out_K": 603.2554551846451,
+    "polytropic_head_kJ_kg": 136.80841383012492,
+    "power_kW": 45.60280461004164,
+    "stage": 4
+   }
+  ],
+  "total_power_kW": 186.55231798801725
+ },
+ "comp3.cbg": {
+  "n_stages": 3,
+  "stages": [
+   {
+    "P_in_Pa": 200000.0,
+    "P_out_Pa": 928317.7667225557,
+    "T_out_K": 470.97301419415834,
+    "polytropic_head_kJ_kg": 276.4199162113087,
+    "power_kW": 34.55248952641359,
+    "stage": 1
+   },
+   {
+    "P_in_Pa": 928317.7667225557,
+    "P_out_Pa": 4308869.380063767,
+    "T_out_K": 481.5948683958449,
+    "polytropic_head_kJ_kg": 276.1426549246931,
+    "power_kW": 34.517831865586636,
+    "stage": 2
+   },
+   {
+    "P_in_Pa": 4308869.380063767,
+    "P_out_Pa": 19999999.999999993,
+    "T_out_K": 538.5373258003658,
+    "polytropic_head_kJ_kg": 276.248609236822,
+    "power_kW": 34.53107615460275,
+    "stage": 3
+   }
+  ],
+  "total_power_kW": 103.60139754660298
+ },
+ "comp3.cbg92": {
+  "n_stages": 3,
+  "stages": [
+   {
+    "P_in_Pa": 200000.0,
+    "P_out_Pa": 928317.7667225557,
+    "T_out_K": 470.77463891388066,
+    "polytropic_head_kJ_kg": 263.64317479469565,
+    "power_kW": 32.95539684933696,
+    "stage": 1
+   },
+   {
+    "P_in_Pa": 928317.7667225557,
+    "P_out_Pa": 4308869.380063767,
+    "T_out_K": 481.61456456663234,
+    "polytropic_head_kJ_kg": 263.33068457056737,
+    "power_kW": 32.91633557132092,
+    "stage": 2
+   },
+   {
+    "P_in_Pa": 4308869.380063767,
+    "P_out_Pa": 19999999.999999993,
+    "T_out_K": 540.0923290604628,
+    "polytropic_head_kJ_kg": 263.23031256318467,
+    "power_kW": 32.90378907039808,
+    "stage": 3
+   }
+  ],
+  "total_power_kW": 98.77552149105597
+ },
+ "comp3.raw": {
+  "n_stages": 3,
+  "stages": [
+   {
+    "P_in_Pa": 200000.0,
+    "P_out_Pa": 928317.7667225557,
+    "T_out_K": 468.86640077169585,
+    "polytropic_head_kJ_kg": 176.33095549215068,
+    "power_kW": 22.041369436518835,
+    "stage": 1
+   },
+   {
+    "P_in_Pa": 928317.7667225557,
+    "P_out_Pa": 4308869.380063767,
+    "T_out_K": 482.7852944660422,
+    "polytropic_head_kJ_kg": 175.6810718756475,
+    "power_kW": 21.960133984455936,
+    "stage": 2
+   },
+   {
+    "P_in_Pa": 4308869.380063767,
+    "P_out_Pa": 19999999.999999993,
+    "T_out_K": 565.7582174985389,
+    "polytropic_head_kJ_kg": 173.75848632775447,
+    "power_kW": 21.719810790969305,
+    "stage": 3
+   }
+  ],
+  "total_power_kW": 65.72131421194408
+ },
+ "comp3.raw55": {
+  "n_stages": 3,
+  "stages": [
+   {
+    "P_in_Pa": 200000.0,
+    "P_out_Pa": 928317.7667225557,
+    "T_out_K": 468.6039055301229,
+    "polytropic_head_kJ_kg": 167.61708566119296,
+    "power_kW": 20.952135707649116,
+    "stage": 1
+   },
+   {
+    "P_in_Pa": 928317.7667225557,
+    "P_out_Pa": 4308869.380063767,
+    "T_out_K": 483.14197770120177,
+    "polytropic_head_kJ_kg": 166.9198916159347,
+    "power_kW": 20.864986451991836,
+    "stage": 2
+   },
+   {
+    "P_in_Pa": 4308869.380063767,
+    "P_out_Pa": 19999999.999999993,
+    "T_out_K": 571.7326987241064,
+    "polytropic_head_kJ_kg": 164.75933563428515,
+    "power_kW": 20.594916954285644,
+    "stage": 3
+   }
+  ],
+  "total_power_kW": 62.412039113926596
+ },
+ "consts": [
+  16.0428,
+  44.0098,
+  28.96,
+  22.414,
+  16.043,
+  0.9
+ ],
+ "dgs.cattle_dung": {
+  "digestate_flow_m3_day": 638.086200197483,
+  "digestate_mass_flow_kg_s": 7.385256946730127,
+  "solids_content_mass_frac": 0.29551307635495205,
+  "vs_destroyed_kg_s": 0.41756000000000004
+ },
+ "dgs.mix": {
+  "digestate_flow_m3_day": 591.5353560678328,
+  "digestate_mass_flow_kg_s": 6.84647402856288,
+  "solids_content_mass_frac": 0.2729653237861305,
+  "vs_destroyed_kg_s": 0.6311500000000002
+ },
+ "dgs.paddy_straw": {
+  "digestate_flow_m3_day": 568.6744858179555,
+  "digestate_mass_flow_kg_s": 6.581880622893005,
+  "solids_content_mass_frac": 0.22658569570720755,
+  "vs_destroyed_kg_s": 1.10864
+ },
+ "dgs.press_mud": {
+  "digestate_flow_m3_day": 629.3345483694386,
+  "digestate_mass_flow_kg_s": 7.283964680201836,
+  "solids_content_mass_frac": 0.2887356120378281,
+  "vs_destroyed_kg_s": 0.49685999999999997
+ },
+ "dig.cattle_dung": {
+  "biodegradability_fraction": 0.292,
+  "biogas_ch4_mole_frac": 0.5072074862938524,
+  "biogas_flow_nm3_s": 0.3116872813254517,
+  "ch4_flow_nm3_s": 0.15809012247084717,
+  "feedstock_name": "cattle dung",
+  "practical_ch4_nm3_per_tonne_vs": 110.55253319639661,
+  "theoretical_ch4_nm3_per_tonne_vs": 378.6045657410843
+ },
+ "dig.mix": {
+  "biodegradability_fraction": 0.3884,
+  "biogas_ch4_mole_frac": 0.5046587894364869,
+  "biogas_flow_nm3_s": 0.4899661957871953,
+  "ch4_flow_nm3_s": 0.24726574723076672,
+  "feedstock_name": "co-digestion mix",
+  "practical_ch4_nm3_per_tonne_vs": 152.16353675739487,
+  "theoretical_ch4_nm3_per_tonne_vs": 391.77017702727824
+ },
+ "dig.paddy_straw": {
+  "biodegradability_fraction": 0.533,
+  "biogas_ch4_mole_frac": 0.5011832937218972,
+  "biogas_flow_nm3_s": 0.9102976490217307,
+  "ch4_flow_nm3_s": 0.45622597400401055,
+  "feedstock_name": "paddy straw",
+  "practical_ch4_nm3_per_tonne_vs": 219.3394105788512,
+  "theoretical_ch4_nm3_per_tonne_vs": 411.5185939565688
+ },
+ "dig.press_mud": {
+  "biodegradability_fraction": 0.273,
+  "biogas_ch4_mole_frac": 0.5116284526702419,
+  "biogas_flow_nm3_s": 0.3894247287319958,
+  "ch4_flow_nm3_s": 0.1992407713926797,
+  "feedstock_name": "press mud",
+  "practical_ch4_nm3_per_tonne_vs": 109.47295131465918,
+  "theoretical_ch4_nm3_per_tonne_vs": 400.9998216654182
+ },
+ "dig_override.cattle_dung": {
+  "biodegradability_fraction": 0.4,
+  "biogas_ch4_mole_frac": 0.5072074862938524,
+  "biogas_flow_nm3_s": 0.4269688785280161,
+  "ch4_flow_nm3_s": 0.21656181160390026,
+  "feedstock_name": "cattle dung",
+  "practical_ch4_nm3_per_tonne_vs": 151.44182629643373,
+  "theoretical_ch4_nm3_per_tonne_vs": 378.6045657410843
+ },
+ "dig_override.mix": {
+  "biodegradability_fraction": 0.4,
+  "biogas_ch4_mole_frac": 0.5046587894364869,
+  "biogas_flow_nm3_s": 0.5045995837149282,
+  "ch4_flow_nm3_s": 0.2546506150677309,
+  "feedstock_name": "co-digestion mix",
+  "practical_ch4_nm3_per_tonne_vs": 156.7080708109113,
+  "theoretical_ch4_nm3_per_tonne_vs": 391.77017702727824
+ },
+ "dig_override.paddy_straw": {
+  "biodegradability_fraction": 0.4,
+  "biogas_ch4_mole_frac": 0.5011832937218972,
+  "biogas_flow_nm3_s": 0.6831502056448261,
+  "ch4_flow_nm3_s": 0.3423834701718653,
+  "feedstock_name": "paddy straw",
+  "practical_ch4_nm3_per_tonne_vs": 164.60743758262754,
+  "theoretical_ch4_nm3_per_tonne_vs": 411.5185939565688
+ },
+ "dig_override.press_mud": {
+  "biodegradability_fraction": 0.4,
+  "biogas_ch4_mole_frac": 0.5116284526702419,
+  "biogas_flow_nm3_s": 0.5705856831238033,
+  "ch4_flow_nm3_s": 0.29192787017242444,
+  "feedstock_name": "press mud",
+  "practical_ch4_nm3_per_tonne_vs": 160.39992866616728,
+  "theoretical_ch4_nm3_per_tonne_vs": 400.9998216654182
+ },
+ "feed.cattle_dung": {
+  "default_biodegradability_fraction": 0.292,
+  "default_hrt_days": 85.0,
+  "elemental_composition": {
+   "C": 0.4,
+   "H": 0.055,
+   "N": 0.024,
+   "O": 0.38,
+   "S": 0.003
+  },
+  "mass_flow_kg_s": 2.6,
+  "name": "cattle dung",
+  "specific_biogas_yield_nm3_per_tonne_fresh": 120.0,
+  "vs_mass_frac": 0.55
+ },
+ "feed.mix": {
+  "default_biodegradability_fraction": 0.3884,
+  "default_hrt_days": 63.0,
+  "elemental_composition": {
+   "C": 0.41600000000000004,
+   "H": 0.05500000000000001,
+   "N": 0.0176,
+   "O": 0.396,
+   "S": 0.0022
+  },
+  "mass_flow_kg_s": 2.5,
+  "name": "co-digestion mix",
+  "specific_biogas_yield_nm3_per_tonne_fresh": 212.0,
+  "vs_mass_frac": 0.6500000000000001
+ },
+ "feed.paddy_straw": {
+  "default_biodegradability_fraction": 0.533,
+  "default_hrt_days": 30.0,
+  "elemental_composition": {
+   "C": 0.44,
+   "H": 0.055,
+   "N": 0.008,
+   "O": 0.42,
+   "S": 0.001
+  },
+  "mass_flow_kg_s": 2.6,
+  "name": "paddy straw",
+  "specific_biogas_yield_nm3_per_tonne_fresh": 350.0,
+  "vs_mass_frac": 0.8
+ },
+ "feed.press_mud": {
+  "default_biodegradability_fraction": 0.273,
+  "default_hrt_days": 30.0,
+  "elemental_composition": {
+   "C": 0.42,
+   "H": 0.058,
+   "N": 0.02,
+   "O": 0.4,
+   "S": 0.003
+  },
+  "mass_flow_kg_s": 2.6,
+  "name": "press mud",
+  "specific_biogas_yield_nm3_per_tonne_fresh": 150.0,
+  "vs_mass_frac": 0.7
+ },
+ "prop.cbg": {
+  "Z": 0.8739752376192236,
+  "mw": 17.44115,
+  "rho": 191.6149529390478,
+  "rho1": 1.0516504487777085
+ },
+ "prop.cbg92": {
+  "Z": 0.8652138124856326,
+  "mw": 18.280159999999995,
+  "rho": 202.86632235846434,
+  "rho1": 1.1023345201266288
+ },
+ "prop.raw": {
+  "Z": 0.7441025133574551,
+  "mw": 27.2296,
+  "rho": 351.3677501074398,
+  "rho1": 1.6439268973714283
+ },
+ "prop.raw55": {
+  "Z": 0.7213498887378185,
+  "mw": 28.62795,
+  "rho": 381.0637951660526,
+  "rho1": 1.7287377743674832
+ },
+ "store.cbg": {
+  "compressibility_factor_Z": 0.8739752376192236,
+  "ideal_gas_density_kg_m3": 167.4667240293871,
+  "real_density_kg_m3": 191.6149529390478,
+  "storage_volume_m3": 5.218799392540609
+ },
+ "store.cbg92": {
+  "compressibility_factor_Z": 0.8652138124856326,
+  "ideal_gas_density_kg_m3": 175.52274419594124,
+  "real_density_kg_m3": 202.86632235846434,
+  "storage_volume_m3": 4.929354406262672
+ },
+ "store.raw": {
+  "compressibility_factor_Z": 0.7441025133574551,
+  "ideal_gas_density_kg_m3": 261.453625972519,
+  "real_density_kg_m3": 351.3677501074398,
+  "storage_volume_m3": 2.846021012725909
+ },
+ "store.raw55": {
+  "compressibility_factor_Z": 0.7213498887378185,
+  "ideal_gas_density_kg_m3": 274.88032625010925,
+  "real_density_kg_m3": 381.0637951660526,
+  "storage_volume_m3": 2.6242325108955558
+ },
+ "store2.cbg": {
+  "compressibility_factor_Z": 0.8135710181537509,
+  "ideal_gas_density_kg_m3": 139.84587901280685,
+  "real_density_kg_m3": 171.8914217563744,
+  "storage_volume_m3": 2.9088129872394757
+ },
+ "store2.cbg92": {
+  "compressibility_factor_Z": 0.8039212920364138,
+  "ideal_gas_density_kg_m3": 146.57319291989066,
+  "real_density_kg_m3": 182.32281489386173,
+  "storage_volume_m3": 2.7423885501716962
+ },
+ "store2.raw": {
+  "compressibility_factor_Z": 0.6667304426120805,
+  "ideal_gas_density_kg_m3": 218.3312079287848,
+  "real_density_kg_m3": 327.4654852557725,
+  "storage_volume_m3": 1.5268784727326805
+ },
+ "store2.raw55": {
+  "compressibility_factor_Z": 0.6404302269415398,
+  "ideal_gas_density_kg_m3": 229.5433977739245,
+  "real_density_kg_m3": 358.4206180678089,
+  "storage_volume_m3": 1.3950090335076817
+ },
+ "up.cattle_dung.membrane": {
+  "ch4_slip_nm3_s": 0.0031618024494169433,
+  "meets_is_16087": true,
+  "power_kW": 336.6222638314879,
+  "product_ch4_flow_nm3_s": 0.15492832002143023,
+  "product_ch4_mole_frac": 0.9805573540517949,
+  "raw_biogas_flow_nm3_s": 0.3116872813254517,
+  "raw_ch4_mole_frac": 0.5072074862938524,
+  "technology": "membrane"
+ },
+ "up.cattle_dung.psa": {
+  "ch4_slip_nm3_s": 0.004742703674125415,
+  "meets_is_16087": true,
+  "power_kW": 269.2978110651902,
+  "product_ch4_flow_nm3_s": 0.15334741879672176,
+  "product_ch4_mole_frac": 0.9803608508670023,
+  "raw_biogas_flow_nm3_s": 0.3116872813254517,
+  "raw_ch4_mole_frac": 0.5072074862938524,
+  "technology": "psa"
+ },
+ "up.cattle_dung.water_scrubbing": {
+  "ch4_slip_nm3_s": 0.0031618024494169433,
+  "meets_is_16087": true,
+  "power_kW": 319.7911506399135,
+  "product_ch4_flow_nm3_s": 0.15492832002143023,
+  "product_ch4_mole_frac": 0.9805573540517949,
+  "raw_biogas_flow_nm3_s": 0.3116872813254517,
+  "raw_ch4_mole_frac": 0.5072074862938524,
+  "technology": "water_scrubbing"
+ },
+ "up.mix.membrane": {
+  "ch4_slip_nm3_s": 0.004945314944615335,
+  "meets_is_16087": true,
+  "power_kW": 529.163491450171,
+  "product_ch4_flow_nm3_s": 0.24232043228615138,
+  "product_ch4_mole_frac": 0.9803620109488742,
+  "raw_biogas_flow_nm3_s": 0.4899661957871953,
+  "raw_ch4_mole_frac": 0.5046587894364869,
+  "technology": "membrane"
+ },
+ "up.mix.psa": {
+  "ch4_slip_nm3_s": 0.0074179724169230014,
+  "meets_is_16087": true,
+  "power_kW": 423.3307931601367,
+  "product_ch4_flow_nm3_s": 0.2398477748138437,
+  "product_ch4_mole_frac": 0.9801635734074012,
+  "raw_biogas_flow_nm3_s": 0.4899661957871953,
+  "raw_ch4_mole_frac": 0.5046587894364869,
+  "technology": "psa"
+ },
+ "up.mix.water_scrubbing": {
+  "ch4_slip_nm3_s": 0.004945314944615335,
+  "meets_is_16087": true,
+  "power_kW": 502.7053168776625,
+  "product_ch4_flow_nm3_s": 0.24232043228615138,
+  "product_ch4_mole_frac": 0.9803620109488742,
+  "raw_biogas_flow_nm3_s": 0.4899661957871953,
+  "raw_ch4_mole_frac": 0.5046587894364869,
+  "technology": "water_scrubbing"
+ },
+ "up.paddy_straw.membrane": {
+  "ch4_slip_nm3_s": 0.009124519480080211,
+  "meets_is_16087": true,
+  "power_kW": 983.1214609434694,
+  "product_ch4_flow_nm3_s": 0.44710145452393035,
+  "product_ch4_mole_frac": 0.9800925599386556,
+  "raw_biogas_flow_nm3_s": 0.9102976490217307,
+  "raw_ch4_mole_frac": 0.5011832937218972,
+  "technology": "membrane"
+ },
+ "up.paddy_straw.psa": {
+  "ch4_slip_nm3_s": 0.013686779220120316,
+  "meets_is_16087": true,
+  "power_kW": 786.4971687547753,
+  "product_ch4_flow_nm3_s": 0.4425391947838902,
+  "product_ch4_mole_frac": 0.9798914555013668,
+  "raw_biogas_flow_nm3_s": 0.9102976490217307,
+  "raw_ch4_mole_frac": 0.5011832937218972,
+  "technology": "psa"
+ },
+ "up.paddy_straw.water_scrubbing": {
+  "ch4_slip_nm3_s": 0.009124519480080211,
+  "meets_is_16087": true,
+  "power_kW": 933.9653878962957,
+  "product_ch4_flow_nm3_s": 0.44710145452393035,
+  "product_ch4_mole_frac": 0.9800925599386556,
+  "raw_biogas_flow_nm3_s": 0.9102976490217307,
+  "raw_ch4_mole_frac": 0.5011832937218972,
+  "technology": "water_scrubbing"
+ },
+ "up.press_mud.membrane": {
+  "ch4_slip_nm3_s": 0.003984815427853594,
+  "meets_is_16087": true,
+  "power_kW": 420.5787070305555,
+  "product_ch4_flow_nm3_s": 0.19525595596482612,
+  "product_ch4_mole_frac": 0.9808917606793882,
+  "raw_biogas_flow_nm3_s": 0.3894247287319958,
+  "raw_ch4_mole_frac": 0.5116284526702419,
+  "technology": "membrane"
+ },
+ "up.press_mud.psa": {
+  "ch4_slip_nm3_s": 0.005977223141780391,
+  "meets_is_16087": true,
+  "power_kW": 336.46296562444434,
+  "product_ch4_flow_nm3_s": 0.1932635482508993,
+  "product_ch4_mole_frac": 0.9806985707516429,
+  "raw_biogas_flow_nm3_s": 0.3894247287319958,
+  "raw_ch4_mole_frac": 0.5116284526702419,
+  "technology": "psa"
+ },
+ "up.press_mud.water_scrubbing": {
+  "ch4_slip_nm3_s": 0.003984815427853594,
+  "meets_is_16087": true,
+  "power_kW": 399.54977167902774,
+  "product_ch4_flow_nm3_s": 0.19525595596482612,
+  "product_ch4_mole_frac": 0.9808917606793882,
+  "raw_biogas_flow_nm3_s": 0.3894247287319958,
+  "raw_ch4_mole_frac": 0.5116284526702419,
+  "technology": "water_scrubbing"
+ },
+ "up_custom": {
+  "ch4_slip_nm3_s": 0.003,
+  "meets_is_16087": true,
+  "power_kW": 450.0,
+  "product_ch4_flow_nm3_s": 0.297,
+  "product_ch4_mole_frac": 0.9674267100977199,
+  "raw_biogas_flow_nm3_s": 0.5,
+  "raw_ch4_mole_frac": 0.6,
+  "technology": "psa"
+ },
+ "vol.cattle_dung": {
+  "daily_feed_m3": 673.9200000000001,
+  "digester_working_volume_m3": 57283.200000000004,
+  "hrt_days": 85.0
+ },
+ "vol.mix": {
+  "daily_feed_m3": 648.0,
+  "digester_working_volume_m3": 40824.0,
+  "hrt_days": 63.0
+ },
+ "vol.paddy_straw": {
+  "daily_feed_m3": 673.9200000000001,
+  "digester_working_volume_m3": 20217.600000000002,
+  "hrt_days": 30.0
+ },
+ "vol.press_mud": {
+  "daily_feed_m3": 673.9200000000001,
+  "digester_working_volume_m3": 20217.600000000002,
+  "hrt_days": 30.0
+ },
+ "vol_hrt.cattle_dung": {
+  "daily_feed_m3": 296.22857142857146,
+  "digester_working_volume_m3": 5924.571428571429,
+  "hrt_days": 20.0
+ },
+ "vol_hrt.mix": {
+  "daily_feed_m3": 288.0,
+  "digester_working_volume_m3": 5760.0,
+  "hrt_days": 20.0
+ },
+ "vol_hrt.paddy_straw": {
+  "daily_feed_m3": 296.22857142857146,
+  "digester_working_volume_m3": 5924.571428571429,
+  "hrt_days": 20.0
+ },
+ "vol_hrt.press_mud": {
+  "daily_feed_m3": 296.22857142857146,
+  "digester_working_volume_m3": 5924.571428571429,
+  "hrt_days": 20.0
+ }
+}

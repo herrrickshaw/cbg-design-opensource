@@ -22,7 +22,7 @@ class FeedstockAnalysis:
     name: str
     mass_flow_kg_s: float
     vs_mass_frac: float  # Volatile Solids, kg VS / kg fresh (as-received) mass
-    elemental_composition: dict  # {"C": frac, "H": frac, "O": frac, "N": frac, "S": frac} of VS, mass basis
+    elemental_composition: dict[str, float]  # {"C": frac, "H": frac, "O": frac, "N": frac, "S": frac} of VS, mass basis
     specific_biogas_yield_nm3_per_tonne_fresh: float  # literature range midpoint, Nm3 biogas / tonne fresh mass
     default_biodegradability_fraction: float  # see anaerobic_digestion.py -- back-solved per substrate, not asserted
     default_hrt_days: float  # see anaerobic_digestion.digester_working_volume() -- real, cited, substrate-dependent
@@ -88,7 +88,7 @@ def cattle_dung(mass_flow_kg_s: float, vs_mass_frac: float = 0.55,
                              _CATTLE_DUNG_ELEMENTAL, specific_yield_nm3_per_tonne, 0.292, default_hrt_days=85.0)
 
 
-def co_digestion_mix(feedstocks: list, mass_shares: list) -> FeedstockAnalysis:
+def co_digestion_mix(feedstocks: list[FeedstockAnalysis], mass_shares: list[float]) -> FeedstockAnalysis:
     """Mass-weighted blend of several feedstocks fed to one digester (e.g.
     the real Adani Total Gas Barsana plant's agricultural-waste + cattle-
     dung mix, see docs/VALIDATION.md) -- a simple linear mass-weighted
