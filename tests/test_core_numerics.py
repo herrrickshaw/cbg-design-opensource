@@ -405,3 +405,60 @@ def test_property_accessors_request_the_right_coolprop_output(monkeypatch):
     assert calls[0][1:5] == ("T", 300.0, "P", 2e5)
     assert calls[1][1:5] == ("T", 310.0, "P", 3e5)
     assert calls[0][5] == "Methane[0.5]&CarbonDioxide[0.5]"
+
+
+# ------------------------------------------------- boundary / survivor tests
+
+
+def test_co_digestion_share_total_tolerance_is_tight():
+    s = F.paddy_straw(1.0)
+    with pytest.raises(ValueError, match="sum to 1.0"):
+        F.co_digestion_mix([s, s], [0.5, 0.4999])        # off by 1e-4
+
+
+def test_co_digestion_biodegradability_is_weighted_by_theoretical_methane():
+    straw, dung = F.paddy_straw(1.0), F.cattle_dung(1.0)
+    mix = F.co_digestion_mix([straw, dung], [0.5, 0.5])
+    w = [0.5 * straw.vs_mass_frac, 0.5 * dung.vs_mass_frac]
+    m = [AD.buswell_theoretical_yield(f.elemental_composition)["mol_ch4_per_kg_vs"] for f in (straw, dung)]
+    expected = (0.533 * w[0] * m[0] + 0.292 * w[1] * m[1]) / (w[0] * m[0] + w[1] * m[1])
+    assert mix.default_biodegradability_fraction == pytest.approx(expected, rel=1e-12)
+    # and it differs from the plain VS-weighted mean, which would ignore methane potential
+    vs_only = (0.533 * w[0] + 0.292 * w[1]) / (w[0] + w[1])
+    assert mix.default_biodegradability_fraction != pytest.approx(vs_only, rel=1e-6)
+
+
+def test_co_digestion_mix_yields_the_same_methane_as_digesting_streams_separately():
+    straw, dung = F.paddy_straw(3.0), F.cattle_dung(1.0)
+    mix = F.co_digestion_mix([straw, dung], [0.75, 0.25])        # shares equal the mass fractions
+    separate = AD.digest(straw).ch4_flow_nm3_s + AD.digest(dung).ch4_flow_nm3_s
+    # the mix blends VS on mass share while elements/biodegradability blend on VS mass, so the
+    # documented "no synergy" property holds only approximately; assert it to 0.5 %
+    assert AD.digest(mix).ch4_flow_nm3_s == pytest.approx(separate, rel=5e-3)
+
+
+def test_buswell_all_zero_composition_has_no_methane():
+    with pytest.raises(ValueError, match="non-positive"):
+        AD.buswell_theoretical_yield({"C": 0.0, "H": 0.0, "O": 0.0, "N": 0.0})
+
+
+def test_digestate_exactly_equal_to_biogas_mass_is_rejected():
+    ch4_kmol = 2.2414 / AD.MOLAR_VOLUME_NM3_PER_KMOL
+    co2_kmol = ch4_kmol * (1 - 0.5) / 0.5
+    biogas = ch4_kmol * DG.MW_CH4_KG_KMOL + co2_kmol * DG.MW_CO2_KG_KMOL
+    f = _glucose_feed(mass_flow=biogas)
+    with pytest.raises(ValueError, match="non-positive"):
+        DG.characterize_digestate(f, _digestion(), dilution_water_kg_s=0.0)
+
+
+def test_upgrading_zero_power_override_is_honoured():
+    assert U.upgrade_biogas(1.0, 0.6, specific_power_kwh_per_nm3=0.0).power_kW == 0.0
+
+
+def test_compression_defaults_are_four_stages_and_075_efficiency():
+    g = _FakeGas()
+    default = CS.compress_to_cbg_pressure(g, 1.5, 2e5)
+    explicit = CS.compress_to_cbg_pressure(g, 1.5, 2e5, 250e5, 313.15, 4, 0.75)
+    assert default.n_stages == 4
+    assert default.total_power_kW == pytest.approx(explicit.total_power_kW)
+    assert default.stages[-1].P_out_Pa == pytest.approx(250e5)
