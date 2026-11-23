@@ -1,0 +1,9 @@
+[run]
+source = cbg_design
+omit =
+    tests/*
+    */conftest.py
+    */test_*.py
+    docs/*
+    examples/*
+    streamlit_app.py
